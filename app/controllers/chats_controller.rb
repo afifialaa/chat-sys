@@ -13,8 +13,13 @@ class ChatsController < ApplicationController
         if @application == nil 
             render(json: {}, status: :not_found)
         else
-            @application.chats.create(number: params[:number])
-            render(json: {}, status: :created)
+            @chat = @application.chats.create(number: params[:number])
+
+            # udpate chats_count column
+            chats_count = @application.chats.count
+            @application.update(chats_count: chats_count)
+
+            render(json: {"number": @chat.number}, status: :created)
         end
     end
 
