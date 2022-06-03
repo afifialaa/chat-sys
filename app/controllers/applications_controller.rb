@@ -36,7 +36,7 @@ class ApplicationsController < ApplicationController
         if @application == nil
             render(json: {}, status: :not_found)
         elsif @application.update(application_params)
-            render(json: @application, status: :ok)
+            render(json: @application.as_json(:except => :id), status: :ok)
         else
             render(json: {}, status: :internal_server_error)
         end

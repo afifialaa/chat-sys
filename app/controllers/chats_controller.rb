@@ -36,7 +36,7 @@ class ChatsController < ApplicationController
         if @chat == nil
             render(json: {} , status: :not_found)
         else
-            render(json: @chat , status: :ok)
+            render(json: @chat.as_json(:except => :id) , status: :ok)
         end
 
     end
