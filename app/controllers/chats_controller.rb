@@ -2,6 +2,11 @@ class ChatsController < ApplicationController
 
     skip_before_action :verify_authenticity_token
 
+    def index
+        @application = Application.find_by(token: params[:token])
+        @application.chats
+    end
+
     def create
         @application = Application.find_by(token: params[:token])
 
