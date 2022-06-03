@@ -5,20 +5,20 @@ class ApplicationsController < ApplicationController
     def create
         @application = Application.new(application_params)
         if @application.save
-            head 201
+            render(json: {token: @application.token} , status: :created)
         else
-            head 500
+            render(json: {} , status: :internal_server_error)
         end
     end
 
     def delete
         @application = Application.find_by(token: params[:token])
         if @application == nil
-            head :not_found
+            render(json: {} , status: :not_found)
         elsif @application.destroy
-            head :ok
+            render(json: {} , status: :ok)
         else
-            head :internal_server_error
+            render(json: {} , status: :internal_server_error)
         end
     end
 

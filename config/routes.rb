@@ -4,4 +4,9 @@ Rails.application.routes.draw do
     delete '/application/:token', to: 'applications#delete'
     get '/application/:token', to: 'applications#show'
     put '/application/:token', to: 'applications#update'
+
+    post '/application/:token/chat', to: 'chats#create'
+    delete '/application/:token/chat/:number', to: 'chats#delete'
+    get '/application/:token/chat/:token', to: 'chats#show'
+    
 end

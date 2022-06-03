@@ -1,4 +1,5 @@
 class Application < ApplicationRecord
+    has_many :chats, dependent: :destroy
 
     before_validation :generate_token, on: :create
     before_validation :init_chat_counter, on: :create
