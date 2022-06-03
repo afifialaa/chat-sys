@@ -23,6 +23,10 @@ class Api::V1::MessagesController < ApplicationController
 
         @message = @chat.messages.create(content: params[:content], number: 4)
 
+        # update messages_count column
+        messages_count = @chat.messages.count
+        @chat.update(messages_count: messages_count)
+
         if @message
             render(json: {}, status: :created)
         else
