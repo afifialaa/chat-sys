@@ -28,7 +28,7 @@ class Api::V1::MessagesController < ApplicationController
         @chat.update(messages_count: messages_count)
 
         if @message
-            render(json: {}, status: :created)
+            render(json: {"number": @message.number}, status: :created)
         else
             render(json: {}, status: :internal_server_error)
         end
