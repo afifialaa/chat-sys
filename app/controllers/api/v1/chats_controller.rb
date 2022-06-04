@@ -11,15 +11,23 @@ class Api::V1::ChatsController < ApplicationController
         @application = Application.find_by(token: params[:token])
 
         if @application == nil 
-            render(json: {}, status: :not_found)
+            render(json: {"error": "application not found"}, status: :not_found)
         else
-            @chat = @application.chats.create(number: params[:number])
-
-            # udpate chats_count column
             chats_count = @application.chats.count
-            @application.update(chats_count: chats_count)
 
-            render(json: {"number": @chat.number}, status: :created)
+            @chat = @application.chats.create(number: chats_count+1)
+
+            if @chat == nil
+                render(json: {"error": "failed to create chat"}, status: :internal_server_error)
+            else
+                # udpate chats_count column
+                chats_count = @application.chats.count
+                @application.update(chats_count: chats_count)
+
+                render(json: {"number": @chat.number}, status: :created)
+            end
+
+            
         end
     end
 
@@ -27,6 +35,7 @@ class Api::V1::ChatsController < ApplicationController
         @application = Application.find_by(token: params[:token])
         @chat = @application.chats.find_by(numnber: params[:number])
         if @chat.destroy
+            @application.chats_count = @application.chats_count - 1
             render(json: {} , status: :ok)
         elsif @chat == nil
             render(json: {} , status: :not_found)
