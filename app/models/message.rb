@@ -18,7 +18,7 @@ class Message < ApplicationRecord
             query: {
                 bool: {
                     must: [
-                        { match: {chat_id: 10}},
+                        { match: {chat_id: chat_id}},
                         { wildcard: {content: query}}
                     ]
                 }
