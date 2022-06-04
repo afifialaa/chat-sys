@@ -72,6 +72,17 @@ class Api::V1::MessagesController < ApplicationController
         render(json: @message.as_json(:except => :id), status: :internal_server_error)
     end
 
+    def partial_search
+        @application = Application.find_by(token: params[:token])
+        #@chat = @application.chats.find_by(number: params[:chat_number])
+        @chat = @application.chats.find(params[:chat_number])
+
+        @message = Message.partial_search(params[:query], 10)
+        puts @message
+
+        render(json: {"msg": @message}, status: :ok)
+    end
+
     private
     
     def message_params
