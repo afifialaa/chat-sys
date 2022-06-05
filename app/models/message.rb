@@ -1,7 +1,11 @@
 class Message < ApplicationRecord
-    belongs_to :chat
+    belongs_to :chat, counter_cache: true
+
+    before_validation :increment_message_number, on: :create
+
     validates :content, presence: true
-    validates :chat_id, presence: true
+    validates :chat_id, presence: true, uniqueness: {scope: :number}
+
 
     include Elasticsearch::Model
     include Elasticsearch::Model::Callbacks
@@ -24,6 +28,16 @@ class Message < ApplicationRecord
                 }
             }
         })
+    end
+
+    private
+    def increment_message_number
+        chat = Chat.find(self.chat_id)
+        if chat.messages_count == 0
+            self.number = 1
+        else
+            self.number = Message.where(chat_id: self.chat_id).maximum(:number) + 1
+        end
     end
 
 end
