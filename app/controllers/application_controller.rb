@@ -10,7 +10,7 @@ class ApplicationController < ActionController::Base
     end
 
     def set_chat
-        @chat = @application.chats.find_by(number :params[:chat_number])
+        @chat = @application.chats.find_by(number: params[:chat_number])
         if @chat == nil
           render( json: {"error": "chat not found"}, status: :not_found)
         end
