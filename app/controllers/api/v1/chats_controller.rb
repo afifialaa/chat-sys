@@ -2,8 +2,10 @@ class Api::V1::ChatsController < ApplicationController
 
     skip_before_action :verify_authenticity_token
 
+    before_action :set_application
+    before_action :set_chat, only: %i[ show update destroy ]
+
     def index
-        @application = Application.find_by(token: params[:token])
         @application.chats
     end
 

@@ -188,6 +188,7 @@ GEM
     rb-fsevent (0.11.1)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.6.0)
     regexp_parser (2.5.0)
     rexml (3.2.5)
     ruby2_keywords (0.0.5)
@@ -261,6 +262,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.6)
+  redis (~> 4.0)
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   spring
@@ -271,7 +273,7 @@ DEPENDENCIES
   webpacker (~> 5.0)
 
 RUBY VERSION
-   ruby 3.1.2p0
+   ruby 3.0.0p0
 
 BUNDLED WITH
    2.3.9

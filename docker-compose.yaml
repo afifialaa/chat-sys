@@ -1,5 +1,18 @@
 version: '3.7'
 services:
+    elasticsearch:
+      image: elasticsearch:8.2.2
+      environment:
+        - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+        - discovery.type=single-node
+      expose: 
+        - 9200
+      ports: 
+        - "9200:9200"
+        - "9300:9300"
+      volumes:
+        - elasticsearch:/usr/share/elasticsearch/data
+
     db:
         image: mysql:5.7
         restart: always
@@ -9,6 +22,15 @@ services:
         ports:
             - "3307:3306"
         tty: true
+
+    redis:
+      image: 'redis:5-alpine'
+      command: redis-server
+      ports:
+        - '6379:6379'
+      volumes:
+        - 'redis:/data'
+
     app: 
         build: .
         command: bash -c "bash ./init.sh && bundle exec rails s -p 3000 -b '0.0.0.0'"
@@ -19,10 +41,20 @@ services:
             - "3001:3000"
         depends_on:
             - db
+            - redis
+            - elasticsearch
         links:
             - db:mysql
+            - redis
+            - elasticsearch
         environment:
-            DB_USER: root
-            DB_NAME: chat_sys_dev
-            DB_PASSWORD: admin12345
-            DB_HOST: db
+            - ELASTICSEARCH_URL=http://elasticsearch:9200
+            - DB_USER=root
+            - DB_NAME=chat_sys_dev
+            - DB_PASSWORD=admin12345
+            - DB_HOST=db
+
+volumes: 
+  redis:
+  db:
+  elasticsearch:

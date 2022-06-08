@@ -2,6 +2,8 @@ class Api::V1::ApplicationsController < ApplicationController
 
     skip_before_action :verify_authenticity_token
 
+    before_action :set_application, only: [:delete, :show, :update]
+
     def create
         @application = Application.new(application_params)
         if @application.save
@@ -12,10 +14,7 @@ class Api::V1::ApplicationsController < ApplicationController
     end
 
     def delete
-        @application = Application.find_by(token: params[:token])
-        if @application == nil
-            render(json: {} , status: :not_found)
-        elsif @application.destroy
+        if @application.destroy
             render(json: {} , status: :ok)
         else
             render(json: {} , status: :internal_server_error)
@@ -23,19 +22,11 @@ class Api::V1::ApplicationsController < ApplicationController
     end
 
     def show
-        @application = Application.find_by(token: params[:token])
-        if @application == nil
-            render(json: {} , status: :not_found)
-        else
-            render(json: @application , status: :ok)
-        end
+        render(json: @application.as_json(:except => :id), status: :ok)
     end
 
     def update
-        @application = Application.find_by(token: params[:token])
-        if @application == nil
-            render(json: {}, status: :not_found)
-        elsif @application.update(application_params)
+        if @application.update(application_params)
             render(json: @application.as_json(:except => :id), status: :ok)
         else
             render(json: {}, status: :internal_server_error)
@@ -45,6 +36,6 @@ class Api::V1::ApplicationsController < ApplicationController
 
     private
     def application_params
-        params.permit(:name)
+        params.permit(:name, :token)
     end
 end
