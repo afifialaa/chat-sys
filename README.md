@@ -62,6 +62,8 @@ all routes are preceeded with /api/v1
 | GET           | /application/:token/chat/:chat_number/messages |returns messages in a chat|
 | GET           | /application/:token/chat/:chat_number/message/:search/:query  |return matching messages|
 
+### **Please check the wiki for more information and code specs.**
+
 ## Pending
 * Queuing jobs
 * Database seeders
