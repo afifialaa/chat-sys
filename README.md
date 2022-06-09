@@ -60,3 +60,8 @@ all routes are preceeded with /api/v1
 | PUT           | /application/:token/chat/:chat_number/message/:number  |updates message|
 | GET           | /application/:token/chat/:chat_number/message/:number  |returns a message|
 | GET           | /application/:token/chat/:chat_number/message/:search/:query  |return matching messages|
+
+## Agenda
+* Race condition handling
+* Database seeders
+* Testing

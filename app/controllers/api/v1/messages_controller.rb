@@ -5,7 +5,7 @@ class Api::V1::MessagesController < ApplicationController
     before_action :set_chat
 
     def index
-        @messages = @chat.messages
+        render(json: {"messages": @chat.messages.as_json(:except => :id)}, status: :ok)
     end
 
     def create
