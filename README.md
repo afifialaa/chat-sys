@@ -19,11 +19,11 @@ git clone https://github.com/afifialaa/chat-sys
 ```bash
 cd chat-sys
 ```
-4. Build an image.
+3. Build an image.
 ```bash
 docker-compose build
 ```
-3. Start the containers
+4. Start the containers
 ```bash
 docker-compose up
 ```
