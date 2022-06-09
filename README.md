@@ -38,16 +38,16 @@ all routes are preceeded with /api/v1
 | Method        | URL                  | description            |
 | ------------- | -------------        |-------------           |
 | POST          | /application  |creates new application  |
-| GET           | /application/:token  |returns chats in application|
-| DELETE        | /application/:token  |deletes application|
-| PUT           | /application/:token  |updates application|
+| GET           | /application/:token  |returns an application|
+| DELETE        | /application/:token  |deletes an application|
+| PUT           | /application/:token  |updates an application|
 
 ### Chat routes
 
 | Method        | URL                  | description            |
 | ------------- | -------------        |-------------           |
 | POST          | /application/:token/chat  |creates new chat  |
-| GET           | /application/:token/chat  |returns chats from application|
+| GET           | /application/:token/chats  |returns chats in application|
 | DELETE        | /application/:token/chat/:chat_number |deletes a chat|
 | GET        | /application/:token/chat/:chat_number |returns chat|
 
@@ -55,10 +55,11 @@ all routes are preceeded with /api/v1
 
 | Method        | URL                  | description            |
 | ------------- | -------------        |-------------           |
-| POST          | /application/:token/chat/:chat_number/message  |creates new message  |
-| DELETE           | /application/:token/chat/:chat_number/message/:number  |deletes message|
-| PUT           | /application/:token/chat/:chat_number/message/:number  |updates message|
+| POST          | /application/:token/chat/:chat_number/message  |creates a new message  |
+| DELETE           | /application/:token/chat/:chat_number/message/:number  |deletes a message|
+| PUT           | /application/:token/chat/:chat_number/message/:number  |updates a message|
 | GET           | /application/:token/chat/:chat_number/message/:number  |returns a message|
+| GET           | /application/:token/chat/:chat_number/messages |returns messages in a chat|
 | GET           | /application/:token/chat/:chat_number/message/:search/:query  |return matching messages|
 
 ## Agenda
