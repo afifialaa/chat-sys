@@ -46,7 +46,7 @@ class Api::V1::MessagesController < ApplicationController
     def show
         @message = @chat.messages.find(params[:message_number])
 
-        render(json: @message.as_json(:except => :id), status: :internal_server_error)
+        render(json: @message.as_json(:except => :id), status: :ok)
     end
 
     def partial_search
