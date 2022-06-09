@@ -7,6 +7,8 @@ This repository is a REST api for a chat system. Built with Ruby/Rails and MySQL
 * Elasticsearch 8.2.2
 * Redis 6.2
 
+Please check the wiki for more information.
+
 ## Installation
 
 1. Clone the repository
