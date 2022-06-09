@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
         @application = Application.find_by(token: params[:token])
         if @application == nil
           render(json: {"error": "application not found"} , status: :not_found)
+          return
         end
     end
 

@@ -6,7 +6,7 @@ class Api::V1::ChatsController < ApplicationController
     before_action :set_chat, only: [:delete, :show, :update]
 
     def index
-        @application.chats
+        render(json: {chats: @application.chats}, status: :ok)
     end
 
     def create
