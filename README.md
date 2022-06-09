@@ -62,7 +62,7 @@ all routes are preceeded with /api/v1
 | GET           | /application/:token/chat/:chat_number/messages |returns messages in a chat|
 | GET           | /application/:token/chat/:chat_number/message/:search/:query  |return matching messages|
 
-## Agenda
-* Race condition handling
+## Pending
+* Queuing jobs
 * Database seeders
 * Testing
