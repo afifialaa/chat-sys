@@ -14,7 +14,7 @@ class Api::V1::ApplicationsController < ApplicationController
     end
 
     def delete
-        if @application.destroy
+        if @application.lock!.destroy
             render(json: {} , status: :ok)
         else
             render(json: {} , status: :internal_server_error)
@@ -26,7 +26,7 @@ class Api::V1::ApplicationsController < ApplicationController
     end
 
     def update
-        if @application.update(application_params)
+        if @application.lock!.update(application_params)
             render(json: @application.as_json(:except => :id), status: :ok)
         else
             render(json: {}, status: :internal_server_error)

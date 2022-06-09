@@ -36,7 +36,7 @@ class Api::V1::MessagesController < ApplicationController
     def update
         @message = @chat.messages.find_by(number: params[:message_number])
 
-        if @message.update(message_params)
+        if @message.lock!.update(message_params)
             render(json: {}, status: :ok)
         else
             render(json: {}, status: :internal_server_error)
