@@ -50,7 +50,7 @@ class Api::V1::MessagesController < ApplicationController
     end
 
     def partial_search
-        @message = Message.partial_search(params[:query], 10)
+        @message = Message.partial_search(params[:query], @chat.id)
 
         render(json: {"result": @message}, status: :ok)
     end
